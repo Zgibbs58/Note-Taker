@@ -4,6 +4,7 @@ const fs = require("fs");
 // ?? checks if the value before is null or undefined
 const PORT = process.env.PORT ?? 3001;
 const app = express();
+const uuid = require("./helpers/uuid");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +25,7 @@ app.post("/api/notes", (req, res) => {
   const newNote = {
     title,
     text,
-    id: Math.floor(Math.random() * 1000),
+    id: uuid(),
   };
   // reading the notes.json file and adding the new note to the array
   let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
@@ -41,7 +42,7 @@ app.delete("/api/notes/:id", (req, res) => {
   const { id } = req.params;
   // reading the notes.json file and filtering out the note with the matching id and writing the new array to the file
   let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
-  notes = notes.filter((note) => note.id !== parseInt(id));
+  notes = notes.filter((note) => note.id !== id);
   notes = JSON.stringify(notes, null, 2);
   fs.writeFileSync("./db/notes.json", notes);
   return res.json(notes);
