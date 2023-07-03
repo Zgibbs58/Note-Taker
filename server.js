@@ -5,7 +5,9 @@ const fs = require("fs");
 const PORT = process.env.PORT ?? 3001;
 const app = express();
 const uuid = require("./helpers/uuid");
+const { readAndAppend, writeToFile, deleteNote } = require("./helpers/fsUtils");
 
+// Middleware for parsing JSON and urlencoded form data to access req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -28,24 +30,25 @@ app.post("/api/notes", (req, res) => {
     id: uuid(),
   };
   // reading the notes.json file and adding the new note to the array
-  let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
-  notes.push(newNote);
-  notes = JSON.stringify(notes, null, 2);
-  console.log(notes);
-  fs.writeFileSync("./db/notes.json", notes);
-  console.log(notes);
-  return res.json(notes);
+  // let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
+  // notes.push(newNote);
+  // notes = JSON.stringify(notes, null, 2);
+  // fs.writeFileSync("./db/notes.json", notes);
+  readAndAppend(newNote, "./db/notes.json");
+  return res.json(newNote);
 });
 
 app.delete("/api/notes/:id", (req, res) => {
   // destructuring the id from the request parameters
   const { id } = req.params;
   // reading the notes.json file and filtering out the note with the matching id and writing the new array to the file
-  let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
-  notes = notes.filter((note) => note.id !== id);
-  notes = JSON.stringify(notes, null, 2);
-  fs.writeFileSync("./db/notes.json", notes);
-  return res.json(notes);
+  // let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
+  // notes = notes.filter((note) => note.id !== id);
+  // notes = JSON.stringify(notes, null, 2);
+  // fs.writeFileSync("./db/notes.json", notes);
+  // return res.json(notes);
+  deleteNote(id);
+  return res.json("Note deleted successfully.");
 });
 
 app.get("*", (req, res) => {
