@@ -8,10 +8,6 @@ router.get("/", (req, res) => {
   readFromFile("./db/notes.json").then((data) => res.json(JSON.parse(data)));
 });
 
-// router.get("/api/notes", (req, res) => {
-//   return res.sendFile(path.join(__dirname, "/db/notes.json"));
-// });
-
 router.post("/", (req, res) => {
   // destructuring the title and text from the request body
   const { title, text } = req.body;
@@ -20,12 +16,8 @@ router.post("/", (req, res) => {
     text,
     id: uuid(),
   };
-  // reading the notes.json file and adding the new note to the array
-  // let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
-  // notes.push(newNote);
-  // notes = JSON.stringify(notes, null, 2);
-  // fs.writeFileSync("./db/notes.json", notes);
   readAndAppend(newNote, "./db/notes.json");
+  //   responds with the new note object
   return res.json(newNote);
 });
 

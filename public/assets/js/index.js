@@ -49,8 +49,7 @@ const deleteNote = (id) =>
       "Content-Type": "application/json",
     },
     // added then to update the list of notes after deleting one
-  });
-// .then(getAndRenderNotes);
+  }).then(getAndRenderNotes);
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
