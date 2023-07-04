@@ -1,4 +1,7 @@
 const fs = require("fs");
+const util = require("util");
+
+const readFromFile = util.promisify(fs.readFile);
 
 // function to write the new note to the notes.json file
 const writeToFile = (destination, content) => {
@@ -30,4 +33,4 @@ const deleteNote = (id) => {
   });
 };
 
-module.exports = { writeToFile, readAndAppend, deleteNote };
+module.exports = { readFromFile, writeToFile, readAndAppend, deleteNote };
