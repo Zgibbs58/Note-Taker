@@ -5,7 +5,10 @@ const readFromFile = util.promisify(fs.readFile);
 
 // function to write the new note to the notes.json file
 const writeToFile = (destination, content) => {
-  fs.writeFile(destination, JSON.stringify(content, null, 2), (err) => (err ? console.error(err) : console.info(`\nData written to ${destination}`)));
+  // changed to writeFileSync to automatically return the content
+  fs.writeFileSync(destination, JSON.stringify(content, null, 2), (err) =>
+    err ? console.error(err) : console.info(`\nData written to ${destination}`)
+  );
 };
 
 // function to read and append the new note to the notes.json file
@@ -27,6 +30,8 @@ const deleteNote = (id) => {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
+      // reading the notes.json file and filtering out the
+      // note with the matching id and writing the new array to the file
       const filteredNotes = parsedData.filter((note) => note.id !== id);
       writeToFile("./db/notes.json", filteredNotes);
     }

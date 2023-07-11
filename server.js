@@ -1,10 +1,6 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
-// ?? checks if the value before is null or undefined
 const routes = require("./routes");
-const uuid = require("./helpers/uuid");
-const { readAndAppend, writeToFile, deleteNote } = require("./helpers/fsUtils");
+// ?? checks if the value before is null or undefined
 const PORT = process.env.PORT ?? 3001;
 const app = express();
 

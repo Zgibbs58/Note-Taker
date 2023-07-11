@@ -48,8 +48,8 @@ const deleteNote = (id) =>
     headers: {
       "Content-Type": "application/json",
     },
-    // added then to update the list of notes after deleting one
-  }).then(getAndRenderNotes);
+    // added .then chain to run getNotes fetch to update the list of notes after deleting one
+  });
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);

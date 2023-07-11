@@ -24,13 +24,8 @@ router.post("/", (req, res) => {
 router.delete("/:id", (req, res) => {
   // destructuring the id from the request parameters
   const { id } = req.params;
-  // reading the notes.json file and filtering out the note with the matching id and writing the new array to the file
-  //   let notes = JSON.parse(fs.readFileSync("./db/notes.json"));
-  //   notes = notes.filter((note) => note.id !== id);
-  //   notes = JSON.stringify(notes, null, 2);
-  //   fs.writeFileSync("./db/notes.json", notes);
-  //   return res.json(notes);
   deleteNote(id);
+  //  always have to have a response to update page data
   return res.json("Note deleted successfully.");
 });
 
