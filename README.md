@@ -35,6 +35,12 @@ Once a new note is entered, a Save icon appears in the navigation at the top of 
 
 In addition, the application allows users to click on the Write icon in the navigation to start a new note, which clears the fields for a fresh note.
 
+## Resources
+
+[Deployed Link](https://morning-escarpment-54006-aa56880bea27.herokuapp.com/notes)
+
+![Screenshot](./public/assets/noteTakerScreen.png)
+
 ## Technologies
 The application is built using the following technologies:
 
